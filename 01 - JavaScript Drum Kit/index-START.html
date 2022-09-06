@@ -3,21 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <title>JS Drum Kit</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./drumkit.js" defer></script>
 </head>
 <body>
 
+<!-- https://www.youtube.com/watch?v=VuN8qwZoego
+
+the html and css is mostly done for you. this exercise is to add the javascript to do an animation when you click one of 
+the keys
+
+the javascript will add a class of playing so it will look like class="key playing" then from css file line 35 it will
+do the stuff in the .playing part.
+
+the .key part from line 27 in the css file is the time the animation will go. it is very short, .07 seconds. 
+
+notice the div data-key="65" or some other number. each key board event has a specific number assigned to it. when a key is pressed, 
+it will take that number and play the audio file that corresponds to it below in the audio tag.
+
+also div data-key='65' is something that he uses. the -key part can be anything such as -hello or -what etc. but the data- part must
+be there bc that is the standard for data attributes. other standard attributes that you already have used are class and src 
+such as class='' and src=''. now you have a new one called a data attribute which is data-anything=''.
+
+-->
 
   <div class="keys">
-    <div data-key="65" class="key">
-      <kbd>A</kbd>
+    <div data-key="65" class="key"> 
+      <kbd>A</kbd> 
       <span class="sound">clap</span>
     </div>
-    <div data-key="83" class="key">
-      <kbd>S</kbd>
+    <div data-key="83" class="key"> 
+      <kbd>S</kbd> 
       <span class="sound">hihat</span>
     </div>
-    <div data-key="68" class="key">
+    <div data-key="68" class="key"> 
       <kbd>D</kbd>
       <span class="sound">kick</span>
     </div>
