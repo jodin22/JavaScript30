@@ -36,19 +36,63 @@ has to sort of reset for the next time and this can be a few seconds. by adding 
 
 window.addEventListener('keydown', function(e) {
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`); // notice this line is almost identical to the one above 
+    // it. bc the data-key match you want is the key that is pressed. since the prev line was finding the audio tag data-key
+    // attribute, this selector is finding the .key which is the class='key'. so for the keyCode that equals some number, you 
+    // can now have the audio data-key and the class='key'
     if (!audio) { // !audio is the opposite of audio meaning it doesn't exist on your page
     return; // this will exit the function(e) immediately
     }
     else {  // for those that exist, it prints to the console and plays a sound
     console.log(audio);
     audio.currentTime = 0;
-    audio.play(); 
+    audio.play();
+    console.log(key); // <div data-key="65" class="key">  the corresponding attributes that we need to connect our animation to 
+    //  the html
+    key.classList.add('playing'); // at this line, it adds the class='playing' and now the div has class='key playing' which will 
+    // show the animation. but the animation doesn't go away bc you need to disable the new class for it to flash briefly
     }
 });
 
-// next you're going to add the animation. so far from lines 37 to 47, the audio part works.
+/* now that we can get the data-key and class attributes, we can connect our style sheet code to the elements which will show 
+the animation each time a key is pressed along with the audio
+*/
 
+/* on the css file, the .key {  } has many properties and values. the one that really matters is this one 
+transition: all .07s ease. and when you add the .playing {  }  properties/values to the div, the scale will increase 
+the size and the color and shadow properties will also add to the animation effect.
+*/
 
+/* 
+window.addEventListener('keydown', function(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`); // notice this line is almost identical to the one above 
+    // it. bc the data-key match you want is the key that is pressed. since the prev line was finding the audio tag data-key
+    // attribute, this selector is finding the .key which is the class='key'. so for the keyCode that equals some number, you 
+    // can now have the audio data-key and the class='key'
+    if (!audio) { // !audio is the opposite of audio meaning it doesn't exist on your page
+    return; // this will exit the function(e) immediately
+    }
+    else {  // for those that exist, it prints to the console and plays a sound
+    console.log(audio);
+    audio.currentTime = 0;
+    audio.play();
+    console.log(key); // <div data-key="65" class="key">  the corresponding attributes that we need to connect our animation to 
+    //  the html
+    key.classList.add('playing'); // at this line, it adds the class='playing' and now the div has class='key playing' which will 
+    // show the animation. but the animation doesn't go away bc you need to take away the new class for it to flash briefly
+    }
+});
+
+after line 82, one way to end the animation is set a timeout. but he says it isn't always a good idea bc it could get out of sync 
+from the css transition time if anyone changes the .07s to something else. instead he says to use a transition end event instead 
+of a setTimeOut function.
+
+a click event means when a click or action happens, then js recognizes that event and knows the event happened.
+a transition end event is where js will see that nothing was clicked but saw that a transition (or change) happened. 
+in this ex, the transition is that the scale is changing in the css and the border color also changed or transitioned. 
+
+*/
 
 
 
