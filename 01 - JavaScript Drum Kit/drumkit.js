@@ -55,20 +55,34 @@ window.addEventListener('keydown', function(e) {
     console.log(key); // <div data-key="65" class="key">  the corresponding attributes that we need to connect our animation to 
     //  the html
     key.classList.add('playing'); // at this line, it adds the class='playing' and now the div has class='key playing' which will 
-    // show the animation. but the animation doesn't go away bc you need to disable the new class for it to flash briefly
+    // show the animation. but the animation doesn't go away bc you need to remove the new class for it to flash briefly.
     }
+
+/* one way to end the animation is to set a timeout. but he says it isn't always a good idea bc it could get out of sync 
+from the css transition time if anyone changes the .07s to something else. instead he says to use a transition end event instead 
+of a setTimeOut function.
+
+a click event means when a click or action happens, then js recognizes that event and knows the event happened which can 
+then do some code. a transition end event is where js will see that nothing was clicked but saw that a transition (or change)
+happened and can still do some code. in this ex, the transition is that the scale is changing in the css and the border color 
+also changed or transitioned. */
 
     function removeTransition(e) {  // in the console, it will show 6 transitionend events bc the element that changed has 
         // 4 border colors, 1 box shadow and 1 transform which totals 6. to limit just the transform, edit the e.
-        if (e.propertyName !== 'transform') return; // this skips non transform
-        console.log(e.propertyName); // only shows the transform event
-        console.log(this); // 'this' shows what was called against it. in this ex, 'this' is the key from the arrow function 
+        // console.log(e); this shows all 6 properties. we only want 'transfrom'
+        if (e.propertyName !== 'transform') return; // this skips the non transform
+        console.log(e.propertyName); // only shows the transform property
+        console.log(this); // 'this' shows what was called against it. in this ex, 'this' is the class=key from the arrow function 
         // below. the key is the element from the node list that the event listener is on when it is passed to the 
         // removeTransition function.
         this.classList.remove('playing');
     };
 
     const keys = document.querySelectorAll('.key'); // selects all the class=key. puts it into an array-like aka node list
+    /* window.addEventListener('transitionend', function(e) {  this is same as line 63. it will show all 6 properties which 
+        we don't want. we only want to see the transform property
+        console.log(e);
+    }) */
     keys.forEach(key => key.addEventListener('transitionend', removeTransition)); // loop through each element in the node list 
     // and use an arrow function that has the event listener. it is listening for 'transitionend'. once that happens, then it 
     // does the removeTransition function which you will create above this block of code.
@@ -85,6 +99,8 @@ the size and the color and shadow properties will also add to the animation effe
 */
 
 /* 
+
+maybe delete the below after cleaning up your notes
 
 The finished code for the answer is from lines 42 to 70 something. These lines below are notes explaining what the answer does.
 
@@ -107,16 +123,6 @@ window.addEventListener('keydown', function(e) {
     // show the animation. but the animation doesn't go away bc you need to take away the new class for it to flash briefly
     }
 });
-
-one way to end the animation is to set a timeout. but he says it isn't always a good idea bc it could get out of sync 
-from the css transition time if anyone changes the .07s to something else. instead he says to use a transition end event instead 
-of a setTimeOut function.
-
-a click event means when a click or action happens, then js recognizes that event and knows the event happened which can 
-then do some code. a transition end event is where js will see that nothing was clicked but saw that a transition (or change)
-happened and can still do some code. in this ex, the transition is that the scale is changing in the css and the border color 
-also changed or transitioned. 
-
 */
 
 
