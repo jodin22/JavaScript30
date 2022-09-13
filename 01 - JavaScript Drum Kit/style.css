@@ -25,7 +25,8 @@ body,html {
   font-size: 1.5rem;
   padding: 1rem .5rem;
   transition: all 2.07s ease; /* it is 2 seconds for now to show the transition end more clearly, but later change it back to .07 */
-  width: 10rem;
+  width: 10rem; /* transition is in the .key part but it also relates to the .playing part bc it will display the .playing 
+  properties for the amount of time of the transition */
   text-align: center;
   color: white;
   background: rgba(0,0,0,0.4);
