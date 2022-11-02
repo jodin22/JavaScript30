@@ -65,7 +65,21 @@
 
     // map takes an array and returns a new array with the same length. if an array has 5 items/elements, then map will do something
     // to each element/item and you will get back 5 items. he gives a factory analogy. map takes a widget and stamps something on it 
-    // and returns that widget at the end of the assembly line.
+    // and returns that widget at the end of the assembly line. whereas filter can take in 10 things and return 2, map will return 
+    // the same amount of items that you give it.
+
+    const fullNames = inventors.map(theThing => { // arrow function on multiple lines. inventors is the array. and theThing is 
+      // what you are calling each item/element in the array. you can call it whatever you want. his video uses inventor. 
+      return `${theThing.first} ${theThing.last}`; // when you leave out return, nothing happens bc a function has to return 
+      // something. if you had console.log instead of return, then the map will show each first and last name as it goes 
+      // through the array.
+    });
+
+    console.log(fullNames);
+
+    // const fullNames = inventors.map(theThing => (`${theThing.first} ${theThing.last}`)); the arrow function on one line doesn't
+    // need a return and also doesn't need the { }. but you will still need the console.log in order to see the results of the map
+    
     
 
     // Array.prototype.sort()
