@@ -39,7 +39,7 @@
     // 1. Filter the list of inventors for those who were born in the 1500's
 
     const fifteen = inventors.filter(function(anything) {  // inventors.filter is the inventors array using the filter method. 
-      // inside the filter() is a function instead of a param/var. this function will loop through the entire array. and the function
+      // inside the filter() is a function acting as the param/var. this function will loop through the entire array. and the function
       // receives (anything). you can name this whatever you want, in the video he names it inventor. that (anything) is each element
       // in the inventors array. and for each element, we can then decide if we want to keep it or not
       if (anything.year >= 1500 && anything.year <= 1599) { // check if each element's year is in the 1500s
@@ -53,13 +53,20 @@
     console.log(fifteen); // show the results but it is in a collapsible format which you have to click to show more details
     console.table(fifteen); // show in a table. easier to read
 
-    // line 41, you can do an arrow function. it will look like this: inventors.filter(anything => {
-        // the if statement
+    // line 41, you can do an arrow function. it will look like this: 
+    // inventors.filter(anything => {
+        // if (anything.year >= 1500 && anything.year <= 1599) {
+          // return true;
+        // }
     // });
-
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+
+    // map takes an array and returns a new array with the same length. if an array has 5 items/elements, then map will do something
+    // to each element/item and you will get back 5 items. he gives a factory analogy. map takes a widget and stamps something on it 
+    // and returns that widget at the end of the assembly line.
+    
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
