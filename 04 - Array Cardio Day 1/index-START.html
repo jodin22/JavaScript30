@@ -72,18 +72,33 @@
       // what you are calling each item/element in the array. you can call it whatever you want. his video uses inventor. 
       return `${theThing.first} ${theThing.last}`; // when you leave out return, nothing happens bc a function has to return 
       // something. if you had console.log instead of return, then the map will show each first and last name as it goes 
-      // through the array.
+      // through the array. also, with return there, it sends the result to const fullNames bc that is what is calling the map
+      // method/function. now that const fullNames has the results, it won't show it until you console log it.
     });
 
     console.log(fullNames);
 
     // const fullNames = inventors.map(theThing => (`${theThing.first} ${theThing.last}`)); the arrow function on one line doesn't
     // need a return and also doesn't need the { }. but you will still need the console.log in order to see the results of the map
-    
-    
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+
+    // the way sort works is you get two items and you sort just those two items. it will look at person A and B. if A is older, then
+    // it puts A on top. and it returns a 1 and -1. then it will bubble these items up and down in the array.
+
+    const ordered = inventors.sort(function(a, b){ // const ordered holds the results of the sort method. the sort method is using 
+      // a function as a param/var. the two params are a and b which represent person A and person B.
+      if (a.year > b.year) { // if person A is born before person B, then it returns a 1. if false, then returns a -1.
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+
+    // unsure how this works, but it does sort properly. better learn how to step through so you can see what happens at each 
+    // iteration going through the array
+    console.table(ordered);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
