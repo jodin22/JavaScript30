@@ -35,6 +35,19 @@
       'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
     ];
     
+    /* 
+    these array methods are useful bc when you apply them, it will loop through the entire array. it will do something on 
+    each item/element in your array. compared to the traditional for loop:
+
+    for (let i = 0; i <= array.length; i++) {
+      your code for what to do to each array[i]
+    };
+
+    with these methods, you don't need to write the above block to iterate through each array item. the method does all that and
+    depending on which method you choose, you can either filter, map or sort etc.
+
+    */
+
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
 
@@ -53,7 +66,7 @@
     console.log(fifteen); // show the results but it is in a collapsible format which you have to click to show more details
     console.table(fifteen); // show in a table. easier to read
 
-    // line 41, you can do an arrow function. it will look like this: 
+    // line 54, you can do an arrow function. it will look like this: 
     // inventors.filter(anything => {
         // if (anything.year >= 1500 && anything.year <= 1599) {
           // return true;
@@ -84,7 +97,7 @@
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
 
-    // the way sort works is you get two items and you sort just those two items. it will look at person A and B. if A is older, then
+    // the way sort works is you get two items and you sort those two items. it will look at person A and B. if A is older, then
     // it puts A on top. and it returns a 1 and -1. then it will bubble these items up and down in the array.
 
     const ordered = inventors.sort(function(firstPerson, secondPerson){ // const ordered holds the results of the sort method. 
@@ -99,6 +112,11 @@
 
     // unsure how this works, but it does sort properly. better learn how to step through so you can see what happens at each 
     // iteration going through the array
+
+    // one way to think of the sort and return -1 and 1. imagine the array is a horizontal, reading from left to right.
+    // and each time -1 is returned, it pushes that item to the left. and each time 1 is returned it pushes it to the right. 
+    // so the sort will go through the entire array of items and keep pushing things to the left or right and this results in 
+    // an order of lowest to highest or highest to lowest along the horizontal.
     console.table(ordered);
 
     // Array.prototype.reduce()
@@ -112,7 +130,7 @@
     let totalYears = 0;
     for(let i = 0; i < inventors.length; i++) {
       console.log(inventors[i].year); // it prints out from oldest year to highest year instead of the order of the items in the 
-      // array such as 0, 1, 2, 3, .... 11. if you comment out the sort method at line 90, then when you run this loop, the years
+      // array such as 0, 1, 2, 3, .... 11. if you comment out the sort method at line 103, then when you run this loop, the years
       // will show not in oldest to newest years but by the index position number such as 0, 1, 2, 3, ... 11.
       totalYears += inventors[i].year;
     }
@@ -130,25 +148,30 @@
 
     console.log(totalYearsReduce); 
     
-    // at line 129, it used to look like this: }); which is the usual way to end an arrow function. but that will give you in the 
+    // at line 147, it used to look like this: }); which is the usual way to end an arrow function. but that will give you in the 
     // console.log [object Object]7859843780508967907681. this is unusual bc the first time around the loop, the total
     // is undefined. to fix it, he goes to the end of the arrow function and makes it look like this: }, 0);
     // that fixes it bc it defines total with 0 and then the loop fills in the total correctly.
 
     // 5. Sort the inventors by years lived
 
-    // this sort is very similar to the sort at line 90. instead of just comparing year, we are comparing the years lived
+    // this sort is very similar to the sort at line 103. instead of just comparing year, we are comparing the years lived
     // which is passed minus year. 
     const oldest = inventors.sort(function(firstPerson, secondPerson){
-      const firstPersonYearsLived = firstPerson.passed - firstPerson.year;
-      const secondPersonYearsLived = secondPerson.passed - secondPerson.year;
-      if (firstPersonYearsLived > secondPersonYearsLived) {
-        return -1;  // last sort on line 90 had 1 and then -1. which is ascending order, lowest to highest. this one has 
+      const lastGuy = firstPerson.passed - firstPerson.year;
+      const nextGuy = secondPerson.passed - secondPerson.year;
+      if (lastGuy > nextGuy) {
+        return -1;  // last sort on line 103 had 1 and then -1. which is ascending order, lowest to highest. this one has 
         // -1 and then 1 which is descending order, highest to lowest.
       } else {
         return 1;
       }
     });
+
+    // one way to think of the sort and return -1 and 1. imagine the array is a horizontal, reading from left to right.
+    // and each time -1 is returned, it pushes that item to the left. and each time 1 is returned it pushes it to the right. 
+    // so the sort will go through the entire array of items and keep pushing things to the left or right and this results in 
+    // an order of lowest to highest or highest to lowest along the horizontal.
 
     console.table(oldest);
 
@@ -165,6 +188,22 @@
     const category = document.querySelectorAll("mw-category a"); this will give you a node list of all the links inside the 
     class mw-category  
 
+    in the console, type category; and links; and you can see the dom elements and the node list of the links. there will be 39 
+    links. these are the links inside that div section of class mw-category. next he shows how to convert the list of links to a
+    list of names. then to filter only those street names that have "de" in the name. 
+
+    const de = links.map(anyThing => {
+      anyThing.textContent;
+    }); 
+
+    when you do the above, you'll get this error Uncaught TypeError: links.map is not a function at <anonymous>:1:18. that's bc
+    the node list for a doesn't have map available for it. remember node list is array-like but not a real array so it won't 
+    have all the array methods available for it. and when you click on the [[Prototype]]:NodeList you'll see there is no map. but
+    there is a forEach. instead of using forEach, he will change the node list into a real array. 
+
+    continue the video at 14.10
+    
+    
 
 
     */
