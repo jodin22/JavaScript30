@@ -89,12 +89,13 @@
 
     const ordered = inventors.sort(function(firstPerson, secondPerson){ // const ordered holds the results of the sort method. 
       //it is using a function as a param/var. the two params are person A and B
-      if (firstPerson.year > secondPerson.year) { // if person A is born before person B, then it returns a 1. if false, then returns a -1.
-        return 1;
+      if (firstPerson.year > secondPerson.year) { // if person A is born after person B, then it returns a 1. if false, then returns a -1.
+        return 1; // this makes person A go down the list. if you change it to -1, then this goes up the list
       } else {
-        return -1;
-      }
-    });
+        return -1; // this makes person B go up the list. if you change it to 1, then this goes down the list
+      } 
+    }); // the newer year is pushed down the list and the older years are pushed up. so the sort is oldest year to newest year.
+    // to make it sort newest year to oldest year, going backwards, then change the 1 and -1.
 
     // unsure how this works, but it does sort properly. better learn how to step through so you can see what happens at each 
     // iteration going through the array
@@ -103,18 +104,23 @@
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
     
+    // he explains reduce by differentiating it from map, filter and sort. previous methods take an item in and either sort, map
+    // or filter them. reduce allows you to build something on every single item that it receives. 
+     
     // a reduce is a cleaner way to do the loop below. this is an ex of a common loop on an array
 
     let totalYears = 0;
     for(let i = 0; i < inventors.length; i++) {
-      console.log(inventors[i].year); // it prints out from oldest year to highest year instead of the order of the array
+      console.log(inventors[i].year); // it prints out from oldest year to highest year instead of the order of the items in the 
+      // array such as 0, 1, 2, 3, .... 11. if you comment out the sort method at line 90, then when you run this loop, the years
+      // will show not in oldest to newest years but by the index position number such as 0, 1, 2, 3, ... 11.
       totalYears += inventors[i].year;
     }
     // this will go through the inventors array and print each year as it iterates through the loop. it also accumulates the 
     // years as a sum. then after the loop is done, it will print the sum
     console.log(totalYears);
 
-    // reduce will give you a running total or what you've returned from this function last time. he names that total. and he also
+    // reduce will give you a running total or what you've returned from the last time around. he names that total. and he also
     // wants to get the inventor so he names the second param/var as inventor
     const totalYearsReduce = inventors.reduce((total, inventor) => {
       return total + (inventor.passed - inventor.year); // return total is what the total is after it goes thru all the items/elements.
@@ -124,7 +130,7 @@
 
     console.log(totalYearsReduce); 
     
-    // at line 123, it used to look like this: }); which is the usual way to end an arrow function. but that will give you in the 
+    // at line 129, it used to look like this: }); which is the usual way to end an arrow function. but that will give you in the 
     // console.log [object Object]7859843780508967907681. this is unusual bc the first time around the loop, the total
     // is undefined. to fix it, he goes to the end of the arrow function and makes it look like this: }, 0);
     // that fixes it bc it defines total with 0 and then the loop fills in the total correctly.
@@ -149,7 +155,19 @@
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
+    /* the page lists a lot of boulevard names. we need to get the ones that have "de" in the name. we need to get the dom elements 
+    out of the page. find a boulevard name and inspect element. you'll see that <div class = "mw-category mw-category-columns"> is 
+    holding all the boulevard names. now we can use this for our querySelector
 
+    const category = document.querySelector(".mw-category"); // this gets the class mw-category
+    const links = category.querySelectorAll("a"); // this gets all a's which are the links inside the class mw-category
+    you can write const category to include the class and links together like this: 
+    const category = document.querySelectorAll("mw-category a"); this will give you a node list of all the links inside the 
+    class mw-category  
+
+
+
+    */
     // 7. sort Exercise
     // Sort the people alphabetically by last name
 
