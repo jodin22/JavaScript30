@@ -125,7 +125,7 @@
     // he explains reduce by differentiating it from map, filter and sort. previous methods take an item in and either sort, map
     // or filter them. reduce allows you to build something on every single item that it receives. 
      
-    // a reduce is a cleaner way to do the loop below. this is an ex of a common loop on an array
+    // a reduce is a cleaner way to do the loop below. this is an ex of a common loop on an array that accumulates values
 
     let totalYears = 0;
     for(let i = 0; i < inventors.length; i++) {
@@ -138,21 +138,35 @@
     // years as a sum. then after the loop is done, it will print the sum
     console.log(totalYears);
 
-    // reduce will give you a running total or what you've returned from the last time around. he names that total. and he also
-    // wants to get the inventor so he names the second param/var as inventor
-    const totalYearsReduce = inventors.reduce((total, inventor) => {
-      return total + (inventor.passed - inventor.year); // return total is what the total is after it goes thru all the items/elements.
+    // reduce will give you a running total or what you've returned from the last time around. he names the prevVal as total. 
+    // and he also wants to get the inventor so he names the second param/var currVal as inventor
+    const totalYearsReduce = inventors.reduce((prevVal, currVal) => {
+      return prevVal + (currVal.passed - currVal.year); // return total + {the years lived} is done at each iteration of the loop.
       // reduce is similar to map, ordered, filtered in that it will loop through each element/item of the array. it won't skip any.
-      // (inventor.passed - inventor.year) is the years lived for each inventor. then it will sum all the years
-    }, 0); 
+      // this will go to an item and do the math of (passed - year) to get the years lived. then it adds it to total. then it does 
+      // it again to the second item in the array. then again to the third item in the array and won't skip any items until it 
+      // reaches the length of the array aka the last item. then it returns the accumulated total to the const totalYearsReduce
+    }, 0); // this 0 here is initializing the total var with 0. then after each iteration, the 0 increases by the years lived
+
+    // in a single line: reduce((previousValue, currentValue) => { /* … */ } , initialValue)
+    // his video is like this: reduce((total, inventor) => {total + (inventor.passed - inventor.year)}, 0)
+                                  // (prevVal, currVal) => {prevVal + (currVal's from array)}, initial value for prevVal 
 
     console.log(totalYearsReduce); 
     
-    // at line 147, it used to look like this: }); which is the usual way to end an arrow function. but that will give you in the 
-    // console.log [object Object]7859843780508967907681. this is unusual bc the first time around the loop, the total
-    // is undefined. to fix it, he goes to the end of the arrow function and makes it look like this: }, 0);
+    // at line 149, it used to look like this: }); without a 0 which is the usual way to end an arrow function. but that will 
+    // give you in the console.log [object Object]7859843780508967907681. this is unusual bc the first time around the loop, 
+    // the total is undefined. to fix it, he goes to the end of the arrow function and makes it look like this: }, 0);
     // that fixes it bc it defines total with 0 and then the loop fills in the total correctly.
 
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#how_reduce_works_with_an_initial_value
+    // the reduce ex in his video is very close to the example paragraph on "How reduce works with an initial value". 
+    
+    // [15, 16, 17, 18, 19].reduce(
+    //   (previousValue, currentValue) => previousValue + currentValue, 
+    //   10,
+    // ); // this in a single line: reduce((previousValue, currentValue) => { /* … */ } , initialValue)
+    
     // 5. Sort the inventors by years lived
 
     // this sort is very similar to the sort at line 103. instead of just comparing year, we are comparing the years lived
@@ -184,8 +198,9 @@
 
     const category = document.querySelector(".mw-category"); // this gets the class mw-category
     const links = category.querySelectorAll("a"); // this gets all a's which are the links inside the class mw-category
-    you can write const category to include the class and links together like this: 
-    const category = document.querySelectorAll("mw-category a"); this will give you a node list of all the links inside the 
+
+    you can write const category to include the class and links together instead of with two lines: 
+    const category = document.querySelectorAll(".mw-category a"); this will give you a node list of all the links inside the 
     class mw-category  
 
     in the console, type category; and links; and you can see the dom elements and the node list of the links. there will be 39 
@@ -193,20 +208,57 @@
     list of names. then to filter only those street names that have "de" in the name. 
 
     const de = links.map(anyThing => {
-      anyThing.textContent;
+      return anyThing.textContent;
     }); 
 
     when you do the above, you'll get this error Uncaught TypeError: links.map is not a function at <anonymous>:1:18. that's bc
-    the node list for a doesn't have map available for it. remember node list is array-like but not a real array so it won't 
+    the node list doesn't have map available for it. remember node list is array-like but not a real array so it won't 
     have all the array methods available for it. and when you click on the [[Prototype]]:NodeList you'll see there is no map. but
-    there is a forEach. instead of using forEach, he will change the node list into a real array. 
+    there is a forEach. a forEach will work here but instead of using forEach, he will change the node list into a real array. 
 
-    continue the video at 14.10
-    
+    you can wrap it inside of Array.from(). so it will look like this:
+    const links = Array.from(category.querySelectorAll("a")); this makes your node list from array-like to a real array and you can 
+    now use map and more methods instead of being limited to just forEach.
+
+    another way is to use spread. this takes your node list and spreads every item into an array. a spread takes every item out 
+    of something, an iterable, in this case it is a node list. and then puts it into an array. 
+    const links = [...category.querySelectorAll("a")]; this is using spread notation
+
+    putting it altogether:
+    const category = document.querySelector(".mw-category");
+    const links = Array.from(category.querySelectorAll("a"));  or const links = [...category.querySelectorAll("a")];
     
 
+    const de = links.map(anyThing => {
+      return anyThing.textContent; // be sure to have return or else it won't work. if you have your arrow function in one line, 
+      // then you don't need return and { }
+    });
+
+    const de = links.map(anyThing => anyThing.textContent); // when your arrow function is one line, no need for return and no 
+    // need for { }
+
+    before adding the filter, if you just stopped after map, then you will see 39 items of your array with the street names
+
+    after map takes each array element and gets the street name, next you want to filter those street names that have "de".
+    put const de = links on one line and each method below it.
+      .map etc
+      .filter etc
+
+    it will now look like this:
+    const de = links
+      .map(anyThing => {
+        return anyThing.textContent;
+      })  // be sure to leave out ; here. 
+      .filter(anyStreet => {
+      return anyStreet.includes("de");
+    }); // you only want ; at the end of this whole thing.
+
+    when you type de; you will see that there are only 12 items in your array now. that's bc the original 39 items which were 
+    all the street names are now filtered down to 12 bc only those 12 have "de" in the name.
 
     */
+
+    
     // 7. sort Exercise
     // Sort the people alphabetically by last name
 
