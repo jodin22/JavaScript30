@@ -262,6 +262,65 @@
     // 7. sort Exercise
     // Sort the people alphabetically by last name
 
+    const alpha = people.sort(function(lastOne, nextOne) {
+      console.log(lastOne); // shows the sort as a list in the order of the array. there is no actual sorting of ascending or 
+      // descending bc it is only on lastOne. when lastOne and nextOne are used, then it will do the comparison and sort 
+      // alphabetically
+    });
+
+    const alpha2 = people.sort(function(lastOne, nextOne){
+      const parts = lastOne.split(", "); // each item in the array has last name, first name. so using split will make each item
+      // into its own array where the first item is the last name and the second item is the first name
+      console.log(parts);
+    });
+
+    // const people = ['Bethea, Erin', 'Becker, Carl', 'Bentsen, Lloyd']. using .split(", ") will take the string 'Bethea, Erin'
+    // and make it into two parts. Bethea and Erin. and these two parts are now an array with Bethea as item 0 and Erin as item 1.
+    // the split will do it to all the names in the people array. so when you console.log(parts), it will show
+    // 'Bethea, Erin' string becomes ['Bethea', 'Erin'] array
+    // 'Becker, Carl' string becomes ['Becker', 'Carl'] array
+    // 'Bentsen, Lloyd' string becomes ['Bentsen', 'Lloyd'] array
+
+
+    const alpha3 = people.sort(function(lastOne, nextOne) {
+      const [last, first] = lastOne.split(", "); // using const [last, first], this will take the split items and change it from 
+      // ["last name", "first name"] which had each name as its own array, to "lastname first name" where the entire name is a
+      // single variable instead of an array consisting of two items
+      console.log(typeof [last, first]); // shows object
+      console.log(last, first); // shows the name as last first without the comma
+      console.log(typeof last, typeof first); // shows string string
+    });
+
+    // notice line 272 and 286 are almost the same. 272 has const parts = lastOne.split(", ")
+    // 286 has const [last, first] = lastOne.split(", "). instead of parts as the var name, it is using [last, first]. it looks
+    // like an array but it is not. it is actually a string. he calls it destructure the array. it takes the array and makes it 
+    // into a string. the array items are unpacked and the const [last, first] means it is taking index 0 and index 1 and putting
+    // it together. you can do const [any, anyOther]. all this means is it reads from left to right in the array. so it will always
+    // grab index 0 and index 1. if you wanted to grab other index numbers then it would look like this const [first,,,last].
+    // this means the array has 4 items. and the [first,,,last] is getting index 0, then skipping index 1 and 2 and then getting 
+    // index 3.
+    // ['Bethea', 'Erin'] array becomes 'Bethea Erin' string
+    // ['Becker', 'Carl'] array becomes 'Becker Carl' string
+    // ['Bentsen', 'Lloyd'] array becomes 'Bentsen Lloyd' string. 
+
+    // alpha3 is only doing this for lastOne, we need to do this for nextOne so the sort can do a comparison and order the names
+    // alphabetically
+
+    const alpha4 = people.sort(function(lastOne, nextOne) {
+      const [firstPersonLastName, firstPersonFirstName] = lastOne.split(", ");
+      const [secondPersonLastName, secondPersonFirstName] = nextOne.split(", ");
+      if (firstPersonLastName > secondPersonLastName) { // we only need to sort on the last name
+        return 1; // if the first person's last name is a higher letter, then the 1 will increase the index number position
+      } else {
+        return -1; // if the first person's last name is a lower letter, then the -1 will decrease the index number posiition
+      } // the 1 and -1 moves the items up and down the array to show the sort properly
+    });
+
+    console.log(alpha4); // shows all the items in alphabetic order by the last name. interestingly, this list shows Bernhard Sandra.
+    // before alpha4, Bernard Sandra didn't show up. maybe bc the sort needs 2 items for the comparison and when you did 
+    // the sort in alpha1 to alpha3, it didn't use two items to compare. did it ignore the very first item which is 
+    // Bernhard Sandra and started to show the list starting with the second item?
+
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
