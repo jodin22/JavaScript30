@@ -323,7 +323,74 @@
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
-    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck',
+  'pogo stick', 'pogo stick', 'lines', 'lines' ];
+
+    // reduce is one of the most flexible methods available to arrays. 
+
+    /* 
+
+    
+    const transportation = data.reduce(function(objectToCount, itemInArray) {
+        // code to count each object and accumulate the totals
+    }, {
+      car: 0, // like the previous reduce, you'll need to initialize a starting value while you accumulate the totals for each
+      // object. but you won't know all the objects before hand and to hard code them is not a good idea since they can change.
+      // so before we can identify the object, he shows an ex of a blank object.
+      walk: 0,
+      truck: 0
+    });
+
+    */
+
+    // the same code as above but instead of hard coding the objects for the initial values, here is a blank object 
+
+    const transportation = data.reduce(function(objectToCount, itemInArray) {
+      console.log(itemInArray);  // shows all the items in our array
+      return objectToCount; // this returns a blank object to const transportation for now
+
+    }, { }); // blank object
+
+    console.log(transportation); // when you show transportation at this point, the console shows { } as a blank object bc
+    // we haven't filled up the objects yet
+
+    /* 
+
+    const transportationFillingObjects = data.reduce(function(objectToCount, itemInArray) {
+      objectToCount[itemInArray]++; //  if there was a walk, then this will increment the walk below from 0 to 1
+      return objectToCount;
+    }, { 
+      walk: 0; // but we still don't know if walk exists. if walk doesn't exist, then we can keep it at 0 and check for 
+      // the next object.
+    });
+
+    */
+
+    const transportationFillObjects = data.reduce(function(objectToCount, itemInArray) {
+      if (!objectToCount[itemInArray]) { // since we won't know which objects exist, this line checks for the opposite of it
+      // existing. if it doesn't exist, then it sets that object equal to zero which will fill our formerly blank object with 
+      // something
+        objectToCount[itemInArray] = 0;
+      }
+
+      objectToCount[itemInArray]++; // now that we will have some objects, it will increment the count by 1. 
+      return objectToCount; // this will return a list of objects with their counts to the const transportationFillObjects
+    }, { }); // start with the blank object. 
+
+    console.log(transportationFillObjects); // this will show the object with each item and the count of each item
+
+    // with reduce, you need an initial value for the first param objectToCount. the second param itemInArray is taken from
+    // the items in the const data array. since objectToCount needs that initial value and we don't know it yet, that is why he 
+    // uses the if (!objectToCount[itemInArray]) to give it a value of 0 for those that don't exist. and now that the empty object 
+    // has something in it, we can increment it with each instance from our array
+
+    // first start with a blank object. that is line 377. then each iteration of the loop, see if there is an entry for that. and 
+    // if not, then we need to make an entry and give it zero. then increment the count of it, so now that it exists in our formerly 
+    // blank object. and this will keep going through the array until it reaches the end. 
+
+    // the good thing about reduce and having this (!objectToCount[itemInArray]), is when a new item in the array is added, the 
+    // reduce will capture that as well. so it's dynamic.
+    
 
   </script>
 </body>
