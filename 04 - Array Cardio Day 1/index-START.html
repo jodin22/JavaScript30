@@ -287,8 +287,10 @@
       // ["last name", "first name"] which had each name as its own array, to "lastname first name" where the entire name is a
       // single variable instead of an array consisting of two items
       console.log(typeof [last, first]); // shows object
-      console.log(last, first); // shows the name as last first without the comma
-      console.log(typeof last, typeof first); // shows string string
+      console.log(last, first); // shows the name as last first without the comma. the comma is not part of the string. it is for 
+      // separating the index 0 and index 1 when destructuring the array items into a single variable. in this case, string.
+      console.log(typeof (last, first)); // shows string for the full name
+      console.log(typeof last, typeof first); // shows string string for each part of the full name
     });
 
     // notice line 272 and 286 are almost the same. 272 has const parts = lastOne.split(", ")
@@ -324,7 +326,8 @@
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck',
-  'pogo stick', 'pogo stick', 'lines', 'lines' ];
+  'pogo stick', 'pogo stick', 'lines', 'lines', 'newThing', 'anotherNewThing', 'newThing', 'anotherNewThing', 'anotherNewThing',
+   'newThing' ];
 
     // reduce is one of the most flexible methods available to arrays. 
 
@@ -375,16 +378,19 @@
 
       objectToCount[itemInArray]++; // now that we will have some objects, it will increment the count by 1. 
       return objectToCount; // this will return a list of objects with their counts to the const transportationFillObjects
-    }, { }); // start with the blank object. 
+    }, { }); // start with the blank object. and will fill up with objects found. also line 378 increments each object count 
+    // by 1
 
     console.log(transportationFillObjects); // this will show the object with each item and the count of each item
 
-    // with reduce, you need an initial value for the first param objectToCount. the second param itemInArray is taken from
-    // the items in the const data array. since objectToCount needs that initial value and we don't know it yet, that is why he 
-    // uses the if (!objectToCount[itemInArray]) to give it a value of 0 for those that don't exist. and now that the empty object 
+    // with reduce, you need an initial value for the first param objectToCount. you can think of the first param as the accumulator
+    // and also as the prev Val as it iterates through the array. so basically it starts with this prev Val and each array's items
+    // is added to it and that first param keeps growing. the second param itemInArray is taken from the items in the 
+    // const data array. since objectToCount needs that initial value and we don't know it yet, that is why he uses the 
+    // if (!objectToCount[itemInArray]) to give it a value of 0 for those that don't exist. and now that the empty object 
     // has something in it, we can increment it with each instance from our array
 
-    // first start with a blank object. that is line 377. then each iteration of the loop, see if there is an entry for that. and 
+    // first start with a blank object. that is line 380. then each iteration of the loop, see if there is an entry for that. and 
     // if not, then we need to make an entry and give it zero. then increment the count of it, so now that it exists in our formerly 
     // blank object. and this will keep going through the array until it reaches the end. 
 
