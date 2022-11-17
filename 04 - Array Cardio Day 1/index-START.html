@@ -117,7 +117,21 @@
     // and each time -1 is returned, it pushes that item to the left. and each time 1 is returned it pushes it to the right. 
     // so the sort will go through the entire array of items and keep pushing things to the left or right and this results in 
     // an order of lowest to highest or highest to lowest along the horizontal.
+
     console.table(ordered);
+
+    // be careful with sort bc it treats numbers as strings so the default behavior would show 1, 100, 2, 3, 33333, 4 as an 
+    // ascending sort of numbers bc 100 is viewed as less than 2 when it is a string. same as 33333 is less than 4 when it is a
+    // string. to avoid this behavior, use something like this:
+    // function compareNumbers(a, b) {
+    //   return a - b;  
+    // }
+
+    // or like this: items.sort((a, b) => a.value - b.value);
+    // this is similar to the idea of if a > b, return 1. else -1. the a - b part will sort numbers in ascending order. and even 
+    // if strings and numbers are together, it will sort them as numbers. so it will look like this:
+
+    // 1, 5, '7', 8, '10', 15, '20', 30
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
@@ -154,7 +168,7 @@
 
     console.log(totalYearsReduce); 
     
-    // at line 149, it used to look like this: }); without a 0 which is the usual way to end an arrow function. but that will 
+    // at line 163, it used to look like this: }); without a 0 which is the usual way to end an arrow function. but that will 
     // give you in the console.log [object Object]7859843780508967907681. this is unusual bc the first time around the loop, 
     // the total is undefined. to fix it, he goes to the end of the arrow function and makes it look like this: }, 0);
     // that fixes it bc it defines total with 0 and then the loop fills in the total correctly.
@@ -293,8 +307,8 @@
       console.log(typeof last, typeof first); // shows string string for each part of the full name
     });
 
-    // notice line 272 and 286 are almost the same. 272 has const parts = lastOne.split(", ")
-    // 286 has const [last, first] = lastOne.split(", "). instead of parts as the var name, it is using [last, first]. it looks
+    // notice line 286 and 300 are almost the same. 286 has const parts = lastOne.split(", ")
+    // 300 has const [last, first] = lastOne.split(", "). instead of parts as the var name, it is using [last, first]. it looks
     // like an array but it is not. it is actually a string. he calls it destructure the array. it takes the array and makes it 
     // into a string. the array items are unpacked and the const [last, first] means it is taking index 0 and index 1 and putting
     // it together. you can do const [any, anyOther]. all this means is it reads from left to right in the array. so it will always
@@ -371,14 +385,14 @@
 
     const transportationFillObjects = data.reduce(function(objectToCount, itemInArray) {
       if (!objectToCount[itemInArray]) { // since we won't know which objects exist, this line checks for the opposite of it
-      // existing. if it doesn't exist, then it sets that object equal to zero which will fill our formerly blank object with 
-      // something
+      // existing. if it doesn't exist, then it sets the new object it just found equal to zero which will fill our formerly 
+      // blank object with something in line 395
         objectToCount[itemInArray] = 0;
       }
 
-      objectToCount[itemInArray]++; // now that we will have some objects, it will increment the count by 1. 
+      objectToCount[itemInArray]++; // now that it has found objects, it will increment the count by 1. 
       return objectToCount; // this will return a list of objects with their counts to the const transportationFillObjects
-    }, { }); // start with the blank object. and will fill up with objects found. also line 378 increments each object count 
+    }, { }); // start with the blank object. and will fill up with new objects it finds. also line 393 increments each object count 
     // by 1
 
     console.log(transportationFillObjects); // this will show the object with each item and the count of each item
@@ -390,7 +404,7 @@
     // if (!objectToCount[itemInArray]) to give it a value of 0 for those that don't exist. and now that the empty object 
     // has something in it, we can increment it with each instance from our array
 
-    // first start with a blank object. that is line 380. then each iteration of the loop, see if there is an entry for that. and 
+    // first start with a blank object. that is line 395. then each iteration of the loop, see if there is an entry for that. and 
     // if not, then we need to make an entry and give it zero. then increment the count of it, so now that it exists in our formerly 
     // blank object. and this will keep going through the array until it reaches the end. 
 
