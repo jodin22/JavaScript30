@@ -26,6 +26,40 @@
 
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
+    // array.some method will check to see if at least one thing in your array meets a criteria
+
+    const isAdult = people.some(function(videoUsesPerson) { // isAdult is a const which calls a function aka function expression. 
+      // people.some(function()) is the some method on the people array. this some method has a callback function. this function 
+      // is getting each element in the people array. each element is referred to as videoUsesPerson but you can name this anything 
+      // you want. the if statement is doing some math to see if there is a person 19 years or older 
+      if (2022 - videoUsesPerson.year >= 19) {  // here you are hard coding a year. the ex below is using a dynamic way
+        return true;
+      }
+    });
+
+    console.log(isAdult); // shows true bc the array does have at least one person 19 or older
+
+    const isAlsoAdult = people.some(function(videoUsesPerson) {
+      // instead of hard coding a year, you can make the year dynamic
+      const currentYear = (new Date()).getFullYear();
+      if (currentYear - videoUsesPerson.year >= 19) {
+        return true;
+      }
+    });
+
+    console.log(isAlsoAdult);
+
+    console.log({isAlsoAdult}); // shows true as well, but gives more detail such as the name of the variable and value
+
+    // below is similar as the previous ex's but using an arrow function. 
+    const isAlsoAdult2 = people.some(videoUsesPerson => {
+      // instead of hard coding a year, you can make the year dynamic
+      const currentYear = (new Date()).getFullYear();
+      return currentYear - videoUsesPerson.year >= 19; // the if statement is in one line 
+    });
+
+    console.log({isAlsoAdult2});
+
     // Array.prototype.every() // is everyone 19 or older?
 
     // Array.prototype.find()
