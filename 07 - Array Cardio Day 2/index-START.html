@@ -31,7 +31,8 @@
     const isAdult = people.some(function(videoUsesPerson) { // isAdult is a const which calls a function aka function expression. 
       // people.some(function()) is the some method on the people array. this some method has a callback function. this function 
       // is getting each element in the people array. each element is referred to as videoUsesPerson but you can name this anything 
-      // you want. the if statement is doing some math to see if there is a person 19 years or older 
+      // you want. in is video, he refers to it as person. so it looks like this: people.some(function(person)). 
+      // the if statement is doing some math to see if there is a person 19 years or older 
       if (2022 - videoUsesPerson.year >= 19) {  // here you are hard coding a year. the ex below is using a dynamic way
         return true;
       }
@@ -61,10 +62,33 @@
     console.log({isAlsoAdult2});
 
     // Array.prototype.every() // is everyone 19 or older?
+    // you can take from the .some function/method and use it in the .every function/method but change the method.
+    // where .some checks for at least one in the array to match your criteria, the .every checks if all the elements in the 
+    // array meet the criteria. 
+
+    const allAdults = people.every(function(videoUsesPerson) {
+      const currentYear = (new Date()).getFullYear();
+      if (currentYear - videoUsesPerson.year >= 19) {
+        return true;
+      }
+    });
+
+    console.log(allAdults);  // shows false bc there is one element that is not yet 19 years old
+    
 
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
+
+    // where filter returns a subset from the array, find will return the first item that matches what you are looking for
+
+    const comment = comments.find(function(videoUsesComment){
+      if (videoUsesComment.id === 823423) {
+        return true;
+      }
+    });
+
+    console.log(comment); // shows the object {text: Super good, id: 823423}
 
     // Array.prototype.findIndex()
     // Find the comment with this ID
