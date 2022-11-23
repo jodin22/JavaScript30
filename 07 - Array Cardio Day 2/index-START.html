@@ -82,7 +82,8 @@
 
     // where filter returns a subset from the array, find will return the first item that matches what you are looking for
 
-    const comment = comments.find(function(videoUsesComment){
+    const comment = comments.find(function(videoUsesComment){  // he uses comment as the element name in the function. you can 
+      // name this anything. in your case, it is videoUsesComment.
       if (videoUsesComment.id === 823423) {
         return true;
       }
@@ -90,9 +91,47 @@
 
     console.log(comment); // shows the object {text: Super good, id: 823423}
 
+    const alsoComment = comments.find(videoUsesComment => { // same as previous find ex, but using an arrow function instead
+      if (videoUsesComment.id === 823423) {
+        return true;
+      }
+    });
+
+    console.log(alsoComment);
+
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
+
+    // to delete an item from an array, you need to find the position of that element. that is what findIndex does. it gives you 
+    // the index number. with the index number, you can then remove that item from the array.
+
+    const index = comments.findIndex(function(videoUsesComment) {
+      if (videoUsesComment.id === 823423) {
+        return true;
+      }
+    });
+
+    console.log(index); // shows 1. this means the index is 1 and bc arrays count from 0, 1, 2, 3, etc, our item is the second 
+    // one in the array. it shows 1, but the actual element is text: Super good, id: 823423
+
+    // to remove it, you can use splice. what splice does is it starts at the index you give it and the second parameter is how many 
+    // items to delete. if 1, then you just delete the single item starting at the index number you gave it. if 2, then you 
+    // delete 2 items starting at the index number you gave it.
+
+    console.log('this is before the removal of an item');
+    console.table(comments);
+    
+    comments.splice(index, 1); // here it will just delete the one item. if 2 or 3 etc, then it starts at the index number you 
+    // gave it and then deletes however many items is indicated by the second parameter
+    console.log('this is after the removal of an item');
+    console.log(comments); // this shows the objects but it is collapsed and you need to expand them in the console
+    console.table(comments); // easier to read bc table format
+
+    // before the splice, the comments array had 5 items counting from 0, 1, 2, 3, 4. now that item 1 is removed, the new 
+    // array shows 4 items and it still counts 0, 1, 2, 3. we removed item 1 which was text: Super good, id: 823423. now that it is
+    // gone, the new number 1 is text: 'You are the best', id: 2039842. this new number 1 used to be number 2 and bc of the splice,
+    // everything shifted over one position.
 
   </script>
 </body>
