@@ -73,7 +73,8 @@
       }
     });
 
-    console.log(allAdults);  // shows false bc there is one element that is not yet 19 years old
+    console.log(allAdults);  // shows false bc there is one element that is not yet 19 years old. will only show true if all 
+    // the elements are at least 19 years old
     
 
     // Array.prototype.find()
@@ -132,8 +133,7 @@
     
     comments.splice(index, 1); // here it will just delete the one item. if 2 or 3 etc, then it starts at the index number you 
     // gave it and then deletes however many items is indicated by the second parameter
-    console.log('this is after the removal of an item');
-    console.log(comments); // this shows the objects but it is collapsed and you need to expand them in the console
+    console.log('this is after the removal of an item on the same array');
     console.table(comments); // easier to read bc table format
 
     // before the splice, the comments array had 5 items counting from 0, 1, 2, 3, 4. now that item 1 is removed, the new 
@@ -141,12 +141,15 @@
     // gone, the new number 1 is text: 'You are the best', id: 2039842. this new number 1 used to be number 2 and bc of the splice,
     // everything shifted over one position.
 
-    // for lines 113 to 137, that takes the original array and removes an item and then shows the original array again but now
-    // the array has one less item. it is using splice.
+    // for lines 114 to 137, that takes the original array and removes an item and then shows the original array again but now
+    // the array has one less item. it is using splice. this is different from the ex below at line 154. bc the below ex is 
+    // using two arrays. the original with 5 items. and a new array with 4 items. the ex above at line 114 is doing the work 
+    // on the same array.
 
-    // the below is adding a new step where you have your original array and when you remove the item, you will get another 
+    // the below is adding a new step where you have your original array and when you remove the item, you will get a different 
     // array that doesn't include the item that was removed. this way you can refer to the original array and the new array. 
-    // the below is using slice instead of splice. also notice the ... which is spread syntax
+    // the below is using slice instead of splice. also notice the ... 
+    // that is spread syntax
 
     const commentsUsingSpread = [
       { text: 'Love this!', id: 523423 },
@@ -163,25 +166,32 @@
     });
 
     console.log(indexSpread);
-
+    console.log('original array with 5 items');
     console.table(commentsUsingSpread);
-
-    // commentsUsingSpread.splice(indexSpread, 1);
-
-    // console.table(commentsUsingSpread);
 
     const newCommentsUsingSpread = [  // uses slice instead of splice. and also uses spread syntax bc you need each item that
     // you sliced to become an array item
       ...commentsUsingSpread.slice(0, indexSpread), // slice has start and end. but the end is not included in the slice.
       // the slice(0, indexSpread) will start at 0 which is the first item. and go up to indexSpread which is 1 but not include 
-      // 1. the end result is just the 0
-      ...commentsUsingSpread.slice(indexSpread + 1) // here there is no end which means it starts at the indexSpread of 1 + 1 
+      // 1. the end result is just the 0. this 0 is your first item of the new array.
+      ...commentsUsingSpread.slice(indexSpread + 1) // here there is no end which means it starts at the indexSpread + 1 
       // which is 2. and bc there is no end, it goes all the way to the length of the array. so the result is from index 2 to 
-      // the end of the array
+      // the end of the array.
     ];
+
+    /*  the original array. the line 174 starts at 0 and the end is indexSpread which is 1. so it will not include the 1.
+    the line 177 starts at indexSpread + 1 which is 2. there is no end in the parameters so it goes all the way to the end of 
+    the array.
+      item 0 { text: 'Love this!', id: 523423 }, line 174 gets this item                    
+      item 1 { text: 'Super good', id: 823423 },                     
+      item 2 { text: 'You are the best', id: 2039842 }, line 177 gets this item and the rest of the items to the end          
+      item 3 { text: 'Ramen is my fav food ever', id: 123523 },    
+      item 4 { text: 'Nice Nice Nice!', id: 542328 }               
+    */
 
     // the two parts above will take the original array of 0, 1, 2, 3, 4 and create a new array using these index numbers from the 
     // original array: 0, 2, 3, 4. 
+    console.log('a different array showing 1 less item');
     console.table(newCommentsUsingSpread);
 
 
