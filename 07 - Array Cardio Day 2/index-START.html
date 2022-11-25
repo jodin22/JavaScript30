@@ -24,6 +24,9 @@
       { text: 'Nice Nice Nice!', id: 542328 }
     ];
 
+    // this hw is about some, every, find and findIndex. each one uses an if/then with return true. but some and every will return
+    // true or false. whereas find and findIndex will return the value or index number instead of true
+
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
     // array.some method will check to see if at least one thing in your array meets a criteria
@@ -125,8 +128,8 @@
     // one in the array. it shows 1, but the actual element is text: Super good, id: 823423
 
     // to remove it, you can use splice. what splice does is it starts at the index you give it and the second parameter is how many 
-    // items to delete. if 1, then you just delete the single item starting at the index number you gave it. if 2, then you 
-    // delete 2 items starting at the index number you gave it.
+    // items to delete. if the second param is 1, then you just delete the single item starting at the index number you gave it.
+    // if the second param is 2, then you delete 2 items starting at the index number you gave it.
 
     console.log('this is before the removal of an item');
     console.table(comments);
@@ -151,7 +154,7 @@
     // the below is using slice instead of splice. also notice the ... 
     // that is spread syntax
 
-    const commentsUsingSpread = [
+    const commentsUsingSpread = [  // original array
       { text: 'Love this!', id: 523423 },
       { text: 'Super good', id: 823423 },
       { text: 'You are the best', id: 2039842 },
@@ -165,12 +168,15 @@
       }
     });
 
-    console.log(indexSpread);
+    console.log(indexSpread);  // shows 1. this 1 is the index number which will be used in line 175 to remove the item and 
+    // show a new array
     console.log('original array with 5 items');
-    console.table(commentsUsingSpread);
+    console.table(commentsUsingSpread); // shows the array in a table format. nothing removed yet.
 
+
+    // the new array showing the original array except the missing item
     const newCommentsUsingSpread = [  // uses slice instead of splice. and also uses spread syntax bc you need each item that
-    // you sliced to become an array item
+    // you sliced to become an array item so you can iterate through them with loops and other loop-like methods
       ...commentsUsingSpread.slice(0, indexSpread), // slice has start and end. but the end is not included in the slice.
       // the slice(0, indexSpread) will start at 0 which is the first item. and go up to indexSpread which is 1 but not include 
       // 1. the end result is just the 0. this 0 is your first item of the new array.
@@ -179,20 +185,22 @@
       // the end of the array.
     ];
 
-    /*  the original array. the line 174 starts at 0 and the end is indexSpread which is 1. so it will not include the 1.
-    the line 177 starts at indexSpread + 1 which is 2. there is no end in the parameters so it goes all the way to the end of 
+    /* the line 177 starts at 0 and the end is indexSpread which is 1. so it will not include the 1.
+    the line 180 starts at indexSpread + 1 which is 2. there is no end in the parameters so it goes all the way to the end of 
     the array.
-      item 0 { text: 'Love this!', id: 523423 }, line 174 gets this item                    
+
+    // these items 0 to 4 are from the original array
+      item 0 { text: 'Love this!', id: 523423 }, line 177 gets this item                    
       item 1 { text: 'Super good', id: 823423 },                     
-      item 2 { text: 'You are the best', id: 2039842 }, line 177 gets this item and the rest of the items to the end          
-      item 3 { text: 'Ramen is my fav food ever', id: 123523 },    
-      item 4 { text: 'Nice Nice Nice!', id: 542328 }               
+      item 2 { text: 'You are the best', id: 2039842 }, line 180 gets this item and the rest of the items to the end          
+      item 3 { text: 'Ramen is my fav food ever', id: 123523 }, line 180 also gets this item
+      item 4 { text: 'Nice Nice Nice!', id: 542328 }           line 180 also gets this item    
     */
 
     // the two parts above will take the original array of 0, 1, 2, 3, 4 and create a new array using these index numbers from the 
     // original array: 0, 2, 3, 4. 
     console.log('a different array showing 1 less item');
-    console.table(newCommentsUsingSpread);
+    console.table(newCommentsUsingSpread); // shows the new array without the missing item
 
 
     
