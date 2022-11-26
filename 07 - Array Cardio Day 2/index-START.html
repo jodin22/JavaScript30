@@ -144,9 +144,9 @@
     // gone, the new number 1 is text: 'You are the best', id: 2039842. this new number 1 used to be number 2 and bc of the splice,
     // everything shifted over one position.
 
-    // for lines 114 to 137, that takes the original array and removes an item and then shows the original array again but now
-    // the array has one less item. it is using splice. this is different from the ex below at line 154. bc the below ex is 
-    // using two arrays. the original with 5 items. and a new array with 4 items. the ex above at line 114 is doing the work 
+    // for lines 117 to 140, that takes the original array and removes an item and then shows the original array again but now
+    // the array has one less item. it is using splice. this is different from the ex below at line 157. bc the below ex is 
+    // using two arrays. the original with 5 items. and a new array with 4 items. the ex above at line 117 is doing the work 
     // on the same array.
 
     // the below is adding a new step where you have your original array and when you remove the item, you will get a different 
@@ -168,7 +168,7 @@
       }
     });
 
-    console.log(indexSpread);  // shows 1. this 1 is the index number which will be used in line 175 to remove the item and 
+    console.log(indexSpread);  // shows 1. this 1 is the index number which will be used in line 178 to remove the item and 
     // show a new array
     console.log('original array with 5 items');
     console.table(commentsUsingSpread); // shows the array in a table format. nothing removed yet.
@@ -185,26 +185,24 @@
       // the end of the array.
     ];
 
-    /* the line 177 starts at 0 and the end is indexSpread which is 1. so it will not include the 1.
-    the line 180 starts at indexSpread + 1 which is 2. there is no end in the parameters so it goes all the way to the end of 
+    /* the line 180 starts at 0 and the end is indexSpread which is 1. so it will not include the 1.
+    the line 183 starts at indexSpread + 1 which is 2. there is no end in the parameters so it goes all the way to the end of 
     the array.
 
     // these items 0 to 4 are from the original array
-      item 0 { text: 'Love this!', id: 523423 }, line 177 gets this item                    
-      item 1 { text: 'Super good', id: 823423 },                     
-      item 2 { text: 'You are the best', id: 2039842 }, line 180 gets this item and the rest of the items to the end          
-      item 3 { text: 'Ramen is my fav food ever', id: 123523 }, line 180 also gets this item
-      item 4 { text: 'Nice Nice Nice!', id: 542328 }           line 180 also gets this item    
+      item 0 { text: 'Love this!', id: 523423 }, line 180 gets this item                    
+      item 1 { text: 'Super good', id: 823423 }, line 180 doesn't get this item bc the end parameter of slice goes up to that item
+      // but will not include it                    
+      item 2 { text: 'You are the best', id: 2039842 },          line 183 gets this item and the rest of the items to the end          
+      item 3 { text: 'Ramen is my fav food ever', id: 123523 },  line 183 also gets this item
+      item 4 { text: 'Nice Nice Nice!', id: 542328 }             line 183 also gets this item    
     */
 
     // the two parts above will take the original array of 0, 1, 2, 3, 4 and create a new array using these index numbers from the 
     // original array: 0, 2, 3, 4. 
     console.log('a different array showing 1 less item');
     console.table(newCommentsUsingSpread); // shows the new array without the missing item
-
-
     
-
   </script>
 </body>
 </html>
