@@ -176,7 +176,9 @@
 
     // the new array showing the original array except the missing item
     const newCommentsUsingSpread = [  // uses slice instead of splice. and also uses spread syntax bc you need each item that
-    // you sliced to become an array item so you can iterate through them with loops and other loop-like methods
+    // you sliced to become an array item so you can iterate through them with loops and other loop-like methods. if you didn't 
+    // use the spread syntax then instead of becoming an array item, each slice part becomes an actual array. so you would have
+    // the new array holding two more arrays. but what you want is the new array to hold items and not arrays
       ...commentsUsingSpread.slice(0, indexSpread), // slice has start and end. but the end is not included in the slice.
       // the slice(0, indexSpread) will start at 0 which is the first item. and go up to indexSpread which is 1 but not include 
       // 1. the end result is just the 0. this 0 is your first item of the new array.
@@ -185,24 +187,24 @@
       // the end of the array.
     ];
 
-    /* the line 180 starts at 0 and the end is indexSpread which is 1. so it will not include the 1.
-    the line 183 starts at indexSpread + 1 which is 2. there is no end in the parameters so it goes all the way to the end of 
+    /* the line 182 starts at 0 and the end is indexSpread which is 1. so it will not include the 1.
+    the line 185 starts at indexSpread + 1 which is 2. there is no end in the parameters so it goes all the way to the end of 
     the array.
 
     // these items 0 to 4 are from the original array
-      item 0 { text: 'Love this!', id: 523423 }, line 180 gets this item                    
-      item 1 { text: 'Super good', id: 823423 }, line 180 doesn't get this item bc the end parameter of slice goes up to that item
+      item 0 { text: 'Love this!', id: 523423 }, line 182 gets this item                    
+      item 1 { text: 'Super good', id: 823423 }, line 182 doesn't get this item bc the end parameter of slice goes up to that item
       // but will not include it                    
-      item 2 { text: 'You are the best', id: 2039842 },          line 183 gets this item and the rest of the items to the end          
-      item 3 { text: 'Ramen is my fav food ever', id: 123523 },  line 183 also gets this item
-      item 4 { text: 'Nice Nice Nice!', id: 542328 }             line 183 also gets this item    
+      item 2 { text: 'You are the best', id: 2039842 },          line 185 gets this item and the rest of the items to the end          
+      item 3 { text: 'Ramen is my fav food ever', id: 123523 },  line 185 also gets this item
+      item 4 { text: 'Nice Nice Nice!', id: 542328 }             line 185 also gets this item    
     */
 
     // the two parts above will take the original array of 0, 1, 2, 3, 4 and create a new array using these index numbers from the 
     // original array: 0, 2, 3, 4. 
     console.log('a different array showing 1 less item');
     console.table(newCommentsUsingSpread); // shows the new array without the missing item
-    
+
   </script>
 </body>
 </html>
