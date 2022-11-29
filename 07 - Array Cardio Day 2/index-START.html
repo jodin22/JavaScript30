@@ -84,7 +84,8 @@
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
 
-    // where filter returns a subset from the array, find will return the first item that matches what you are looking for
+    // where filter returns a subset from the array, find will return the first item that matches what you are looking for. it 
+    // doesn't find all items, just the first.
 
     const comment = comments.find(function(videoUsesComment){  // he uses comment as the element name in the function. you can 
       // name this anything. in your case, it is videoUsesComment.
@@ -116,7 +117,7 @@
     // the index number. with the index number, you can then remove that item from the array.
 
     const index = comments.findIndex(function(videoUsesComment) {
-      if (videoUsesComment.id === 1823423) {
+      if (videoUsesComment.id === 823423) {
         return true; // here you use return true just like the .some and .every ex's. but when you console.log this, it won't show 
         // true or false, but it will show the index that it found. this is more helpful bc you can then take that value and 
         // use it elsewhere in your code. but for things that only return true or false, those can't really be used for other 
@@ -128,8 +129,8 @@
     console.log(index); // shows 1. this means the index is 1 and bc arrays count from 0, 1, 2, 3, etc, our item is the second 
     // one in the array. it shows 1, but the actual element is text: Super good, id: 823423
     // if you change 823423 to 1823423, it will show the index as -1. things that are not in the array are -1. however, when 
-    // you splice this at line 142, it treats the -1 as the length of the array and removes the last item which isn't what 
-    // you want. after the splice is done on line 142, the console table will show the original array with the last item missing.
+    // you splice this at line 143, it treats the -1 as the length of the array and removes the last item which isn't what 
+    // you want. after the splice is done on line 143, the console table will show the original array with the last item missing.
 
 
     // to remove it, you can use splice. what splice does is it starts at the index you give it and the second parameter is how many 
@@ -149,9 +150,9 @@
     // gone, the new number 1 is text: 'You are the best', id: 2039842. this new number 1 used to be number 2 and bc of the splice,
     // everything shifted over one position.
 
-    // for lines 117 to 145, that takes the original array and removes an item and then shows the original array again but now
-    // the array has one less item. it is using splice. this is different from the ex below at line 162. bc the below ex is 
-    // using two arrays. the original with 5 items. and a new array with 4 items. the ex above at line 117 is doing the work 
+    // for lines 119 to 146, that takes the original array and removes an item and then shows the original array again but now
+    // the array has one less item. it is using splice. this is different from the ex below at line 163. bc the below ex is 
+    // using two arrays. the original with 5 items. and a new array with 4 items. the ex above at line 119 is doing the work 
     // on the same array.
 
     // the below is adding a new step where you have your original array and when you remove the item, you will get a different 
@@ -168,12 +169,12 @@
     ];
 
     const indexSpread = commentsUsingSpread.findIndex(function(videoUsesComment) {
-      if (videoUsesComment.id === 1823423) {
+      if (videoUsesComment.id === 823423) {
         return true;
       }
     });
 
-    console.log(indexSpread);  // shows 1. this 1 is the index number which will be used in line 187 to remove the item and 
+    console.log(indexSpread);  // shows 1. this 1 is the index number which will be used in line 188 to remove the item and 
     // show a new array
     console.log('original array with 5 items');
     console.table(commentsUsingSpread); // shows the array in a table format. nothing removed yet.
@@ -192,17 +193,17 @@
       // the end of the array.
     ];
 
-    /* the line 187 starts at 0 and the end is indexSpread which is 1. so it will not include the 1.
-    the line 190 starts at indexSpread + 1 which is 2. there is no end in the parameters so it goes all the way to the end of 
+    /* the line 188 starts at 0 and the end is indexSpread which is 1. so it will not include the 1.
+    the line 191 starts at indexSpread + 1 which is 2. there is no end in the parameters so it goes all the way to the end of 
     the array.
 
     // these items 0 to 4 are from the original array
-      item 0 { text: 'Love this!', id: 523423 }, line 187 gets this item                    
-      item 1 { text: 'Super good', id: 823423 }, line 187 doesn't get this item bc the end parameter of slice goes up to that item
+      item 0 { text: 'Love this!', id: 523423 }, line 188 gets this item                    
+      item 1 { text: 'Super good', id: 823423 }, line 188 doesn't get this item bc the end parameter of slice goes up to that item
       // but will not include it                    
-      item 2 { text: 'You are the best', id: 2039842 },          line 190 gets this item and the rest of the items to the end          
-      item 3 { text: 'Ramen is my fav food ever', id: 123523 },  line 190 also gets this item
-      item 4 { text: 'Nice Nice Nice!', id: 542328 }             line 190 also gets this item    
+      item 2 { text: 'You are the best', id: 2039842 },          line 191 gets this item and the rest of the items to the end          
+      item 3 { text: 'Ramen is my fav food ever', id: 123523 },  line 191 also gets this item
+      item 4 { text: 'Nice Nice Nice!', id: 542328 }             line 191 also gets this item    
     */
 
     // the two parts above will take the original array of 0, 1, 2, 3, 4 and create a new array using these index numbers from the 
@@ -211,11 +212,11 @@
     console.table(newCommentsUsingSpread); // shows the new array without the missing item
 
     // if you change 823423 to 1823423, then the slice results are very similar to the splice results when you used -1 to experiment
-    // with splice and -1. at line 187, the slice(0, indexSpread) is 0 at the starting point. and -1 the end point which is
+    // with splice and -1. at line 188, the slice(0, indexSpread) is 0 at the starting point. and -1 the end point which is
     // the length of the original array. bc the end point is not included in the slice, it will take items 0, 1, 2, 3 only. 
-    // and 4 is left out bc that is the end of the array. so the new array will show 0, 1, 2, 3 and then line 190 will show
+    // and 4 is left out bc that is the end of the array. so the new array will show 0, 1, 2, 3 and then line 191 will show
     // 0, 1, 2, 3, 4 which is the original array items. so the new array will be much longer than the original array. 
-    // the reason line 190 is taking the entire original array items is bc slice(indexSpread + 1) is -1 + 1 which equals 0. 
+    // the reason line 191 is taking the entire original array items is bc slice(indexSpread + 1) is -1 + 1 which equals 0. 
     // 0 is the start point of the original array and bc there is no 2nd parameter, there is no end point of the original 
     // array so it grabs everything. 
 
