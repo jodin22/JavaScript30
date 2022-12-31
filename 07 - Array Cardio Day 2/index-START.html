@@ -46,9 +46,12 @@
     const isAlsoAdult = people.some(function(videoUsesPerson) {
       // instead of hard coding a year, you can make the year dynamic
       const currentYear = (new Date()).getFullYear();
+      console.log(currentYear);
       if (currentYear - videoUsesPerson.year >= 19) {
+        console.log(videoUsesPerson.year);
         return true;
       }
+      
     });
 
     console.log(isAlsoAdult);
